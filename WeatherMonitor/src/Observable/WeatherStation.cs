@@ -1,8 +1,5 @@
-﻿
+﻿using WeatherMonitor.src.Models;
 
-using WeatherMonitor.src.Factories;
-using WeatherMonitor.src.Models;
-using WeatherMonitor.src.Observers;
 
 namespace WeatherMonitor.src.Observable
 {

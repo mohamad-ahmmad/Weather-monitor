@@ -1,6 +1,4 @@
 ﻿
-
-
 using WeatherMonitor.src.Factories.BotsFactory;
 using WeatherMonitor.src.Models;
 using WeatherMonitor.src.Observable;
@@ -16,10 +14,9 @@ namespace WeatherMonitor
             string configFileContent = File.ReadAllText("config.json");
 
             IBotsFactory factory = new JsonBotsFactory();
-
             var bots = factory.CreateBots(configFileContent);
 
-            var weatherStation = new WeatherStation(bots);
+            src.Observable.IObservable<WeatherInfoModel> weatherStation = new WeatherStation(bots);
 
             var consoleReader = new ConsoleStreamReader(new WeatherInfoFactory());
 

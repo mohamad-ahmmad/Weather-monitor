@@ -1,5 +1,4 @@
-﻿using WeatherMonitor.src.Models;
-
+﻿
 namespace WeatherMonitor.src.Observable
 {
     public interface IObservable<T>

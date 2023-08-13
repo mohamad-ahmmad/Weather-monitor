@@ -14,6 +14,9 @@ namespace WeatherMonitor.src.Factories.BotsFactory
 {
     public class JsonBotsFactory : IBotsFactory
     {
+
+        
+
         public List<Observers.IObserver<WeatherInfoModel>> CreateBots(string fileContent)
         {
             List<Observers.IObserver<WeatherInfoModel>> observers = new();
