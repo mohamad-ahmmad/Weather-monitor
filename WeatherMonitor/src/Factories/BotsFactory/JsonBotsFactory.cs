@@ -9,6 +9,7 @@ using System.Xml;
 using System.Xml.Serialization;
 using WeatherMonitor.src.Models;
 using WeatherMonitor.src.Observers;
+using WeatherMonitor.src.Writers;
 
 namespace WeatherMonitor.src.Factories.BotsFactory
 {
@@ -27,21 +28,41 @@ namespace WeatherMonitor.src.Factories.BotsFactory
 
                 if(kvp.Key == "RainBot")
                 {
-                    RainBot rainBot = JsonSerializer.Deserialize<RainBot>(kvp.Value.ToString());
+                    var rainBotProperites = JsonSerializer.Deserialize<Dictionary<string, object>>(kvp.Value.ToString());
+
+                    var rainBot = new RainBot(Program.Writer)
+                    {
+                        Message = rainBotProperites["message"].ToString(),
+                        Enabled = bool.Parse(rainBotProperites["enabled"].ToString()),
+                        HumidityThreshold = double.Parse(rainBotProperites["humidityThreshold"].ToString()),
+                    };
                     observers.Add(rainBot);
                 }
-                else if(kvp.Key == "SnowBot")
+                else if (kvp.Key == "SnowBot")
                 {
-                    SnowBot snowBot = JsonSerializer.Deserialize<SnowBot>(kvp.Value.ToString());
-                    observers.Add(snowBot);
+                    var snowBotProperites = JsonSerializer.Deserialize<Dictionary<string, object>>(kvp.Value.ToString());
 
+                    var snowBot = new SnowBot(Program.Writer)
+                    {
+                        Message = snowBotProperites["message"].ToString(),
+                        Enabled = bool.Parse(snowBotProperites["enabled"].ToString()),
+                        TempertureThreshold = double.Parse(snowBotProperites["temperatureThreshold"].ToString()),
+                    };
+                    observers.Add(snowBot);
                 }
-                else if(kvp.Key == "SunBot")
+                else if (kvp.Key == "SunBot")
                 {
-                    SunBot sunBot = JsonSerializer.Deserialize<SunBot>(kvp.Value.ToString());
+                    var sunBotProperites = JsonSerializer.Deserialize<Dictionary<string, object>>(kvp.Value.ToString());
+
+                    var sunBot = new SunBot(Program.Writer)
+                    {
+                        Message = sunBotProperites["message"].ToString(),
+                        Enabled = bool.Parse(sunBotProperites["enabled"].ToString()),
+                        TemperatureThreshold = double.Parse(sunBotProperites["temperatureThreshold"].ToString()),
+                    };
                     observers.Add(sunBot);
                 }
-                
+
                 //Add more types here ...
 
             }

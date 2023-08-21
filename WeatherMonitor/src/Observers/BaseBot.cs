@@ -1,4 +1,6 @@
-﻿using System.Text.Json.Serialization;
+﻿using System.Runtime.CompilerServices;
+using System.Text.Json.Serialization;
+using WeatherMonitor.src.Writers;
 
 namespace WeatherMonitor.src.Observers
 {
@@ -10,6 +12,13 @@ namespace WeatherMonitor.src.Observers
 
         [JsonPropertyName("enabled")]
         public bool Enabled { get; set; } = true;
+
+        protected IWriter _writer;
+
+        public BaseBot(IWriter writer)
+        {
+            _writer = writer;
+        }
 
     }
 }

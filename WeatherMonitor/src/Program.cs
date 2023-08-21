@@ -4,11 +4,14 @@ using WeatherMonitor.src.Models;
 using WeatherMonitor.src.Observable;
 using WeatherMonitor.src.WeatherStreams;
 using WeatherMonitor.src.WeatherStreams.ConsoleStream;
+using WeatherMonitor.src.Writers;
 
 namespace WeatherMonitor
 {
     public class Program
     {
+        
+        public static IWriter Writer = new ConsoleWriter();
         public static void Main(string[] args)
         {
             string configFileContent = File.ReadAllText("config.json");

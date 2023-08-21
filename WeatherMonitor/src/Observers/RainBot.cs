@@ -5,11 +5,18 @@ using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using WeatherMonitor.src.Models;
+using WeatherMonitor.src.Writers;
 
 namespace WeatherMonitor.src.Observers
 {
     public class RainBot : BaseBot, IObserver<WeatherInfoModel>
     {
+        public RainBot(IWriter writer) : base(writer)
+        {
+        }
+
+
+
         [JsonPropertyName("humidityThreshold")]
         public double HumidityThreshold { get; set; }
 
@@ -17,7 +24,7 @@ namespace WeatherMonitor.src.Observers
         {
             if (this.Enabled && this.HumidityThreshold < weatherData.Humidity)
             {
-                Console.WriteLine(this.Message);
+                _writer.WriteLine(this.Message);
             }
         }
     }
